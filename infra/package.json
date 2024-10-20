@@ -5,10 +5,11 @@
         "infra": "bin/infra.ts"
     },
     "scripts": {
-        "build": "tsc --noEmit",
+        "build": "tsc",
         "watch": "tsc -w",
         "test": "jest",
-        "cdk": "cdk"
+        "cdk": "cdk",
+        "precommit": "tsc --noEmit"
     },
     "devDependencies": {
         "@types/jest": "^29.5.12",
