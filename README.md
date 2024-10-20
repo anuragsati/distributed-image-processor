@@ -6,7 +6,7 @@ This document outlines the architecture and workflows of the **Distributed Image
 
 ---
 
-<details>
+<details open>
 <summary>Real Time Processor (RTP)</summary>
 
 #### Architecture Diagram
