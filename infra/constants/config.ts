@@ -1,7 +1,9 @@
 export interface EnvironmentConfig {
-    environment: Stage;
-    account: Account;
-    region: Region;
+    stageName: Stage;
+    env: {
+        account: Account;
+        region: Region;
+    };
 }
 
 export const enum Region {
