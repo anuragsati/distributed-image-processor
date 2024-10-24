@@ -26,11 +26,13 @@ export class ApiGatewayStack extends cdk.Stack {
         const restApi = new RestApi(this, "ApiGatewayId", {
             restApiName: `${props.envConfig.stageName}-ApiGateway`,
             description: `API Gateway for apis in Distributed Image Processor. Stage : ${props.envConfig.stageName}, Region : ${props.envConfig.env.region}`,
+            deploy: true,
             deployOptions: {
                 stageName: props.envConfig.stageName,
                 loggingLevel: MethodLoggingLevel.INFO,
                 metricsEnabled: true,
             },
+            cloudWatchRole: true,
             endpointConfiguration: {
                 types: [EndpointType.REGIONAL],
             },
