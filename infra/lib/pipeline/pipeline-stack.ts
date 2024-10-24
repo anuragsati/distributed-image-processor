@@ -21,10 +21,6 @@ export class PipelineStack extends cdk.Stack {
             synth: new ShellStep("Synth", {
                 input: CodePipelineSource.gitHub("anuragsati/distributed-image-processor", "main"),
                 commands: [
-                    // TODO : find better alternative to this
-                    // Build the uber/fat jar for all java projects
-                    "cd software/rtp-preprocessor-lambda && ./gradlew shadowJar && cd ../../",
-
                     // Infra deployment
                     "cd infra",
                     "npm ci",

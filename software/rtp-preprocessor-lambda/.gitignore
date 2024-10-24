@@ -1,5 +1,11 @@
 .gradle
-build/
+
+# IMPORTANT : Do not ignore the specific file or pattern
+build/*
+!build/libs
+build/libs/*
+!build/libs/lambda-uberjar*
+
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/

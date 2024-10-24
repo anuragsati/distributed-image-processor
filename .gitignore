@@ -1,9 +1,2 @@
 .idea
-
-# ====== INFRA ======
-/infra/*.js
-!infra/jest.config.js
-/infra/*.d.ts
-/infra/node_modules
-/infra/.cdk.staging
-/infra/cdk.out
+.vscode
