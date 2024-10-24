@@ -20,7 +20,17 @@ export class PipelineStack extends cdk.Stack {
             pipelineName: "DIPPipeline-main",
             synth: new ShellStep("Synth", {
                 input: CodePipelineSource.gitHub("anuragsati/distributed-image-processor", "main"),
-                commands: ["cd infra", "npm ci", "npm run build", "npx cdk synth"],
+                commands: [
+                    // TODO : find better alternative to this
+                    // Build the uber/fat jar for all java projects
+                    "cd software/rtp-preprocessor-lambda && ./gradlew shadowJar && cd ../../",
+
+                    // Infra deployment
+                    "cd infra",
+                    "npm ci",
+                    "npm run build",
+                    "npx cdk synth",
+                ],
                 primaryOutputDirectory: "infra/cdk.out",
             }),
             crossAccountKeys: false,
