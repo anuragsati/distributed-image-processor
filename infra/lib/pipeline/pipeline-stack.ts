@@ -28,6 +28,6 @@ export class PipelineStack extends cdk.Stack {
         });
 
         pipeline.addStage(new StagingStage(this, Stage.STAGE));
-        pipeline.addStage(new ProdStage(this, Stage.PROD));
+        // pipeline.addStage(new ProdStage(this, Stage.PROD));
     }
 }

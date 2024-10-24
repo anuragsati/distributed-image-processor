@@ -3,6 +3,9 @@ import * as cdk from "aws-cdk-lib";
 import { Construct } from "constructs";
 import { EnvironmentConfig, Region, Stage } from "../../../constants/config";
 import { pipelineEnvironments } from "../pipeline-config";
+import { RTPPreprocessorLambdaStack } from "../../stacks/lambda/rtp-preprocessor-lambda";
+import { ApiGatewayStack } from "../../stacks/api-gateway/api-gateway-stack";
+import { VpcStack } from "../../stacks/vpc/vpc-stack";
 
 /**
  * Ideally stacks in all evironments should be same i.e. dev/test should be similar to prod
@@ -19,8 +22,20 @@ export class StagingStage extends cdk.Stage {
     }
 
     private stageApSouth1Stacks(envConfig: EnvironmentConfig): void {
-        // new VpcStack(this, "VpcStackId", props);
-        // new ApiGatewayStack(this, "ApiGatewayStackId", envConfig);
+        new VpcStack(this, "VpcStackId", envConfig);
+
+        const rtpPreprocessorLambdaStack = new RTPPreprocessorLambdaStack(
+            this,
+            "RTPPreprocessorLambdaStackId",
+            envConfig
+        );
+
+        new ApiGatewayStack(this, "ApiGatewayStackId", {
+            envConfig,
+            resources: {
+                rtpPreprocessorLambda: rtpPreprocessorLambdaStack.getLambdaFunction(),
+            },
+        });
     }
 
     private stageEuWest1Stacks(envConfig: EnvironmentConfig): void {}
